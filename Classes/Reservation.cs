@@ -7,7 +7,7 @@ using CPRG211_Group1_Assignment2.Exceptions;
 
 namespace CPRG211_Group1_Assignment2.Classes
 {
-    public class Reservation
+    public class Reservation:Flight
     {
         
        public string ReservationCode { get; set; }
@@ -15,7 +15,7 @@ namespace CPRG211_Group1_Assignment2.Classes
        public string FullName { get; set; }
         public string Citizenship { get; set; }
 
-        public Reservation(Flight flight, string name, string citizenship)
+        public Reservation(Flight flight,string reservationCode, string name, string citizenship)
         {
            if (flight == null)
             {
@@ -31,13 +31,13 @@ namespace CPRG211_Group1_Assignment2.Classes
             }
             else
             {
-                ReservationCode = "F"; // ADD NUMBER AFTER
+                ReservationCode = reservationCode;
                 FullName = name;
                 Citizenship = citizenship;
             }
             
         } 
-        public s
+        
 
     
     }
