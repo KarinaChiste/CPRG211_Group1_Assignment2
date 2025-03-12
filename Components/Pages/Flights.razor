@@ -1,4 +1,5 @@
 ﻿@page "/flights"
+@using CPRG211_Group1_Assignment2.Classes
 
 <div class="text-center">
 	<h5>Flight Finder</h5>
@@ -17,7 +18,7 @@
 		<input type="text" class="form-control" placeholder="Any">
 	</div>
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
-		<button type="button" class="btn btn-primary w-100" @* @onclick="FindReservation" *@
+		<button type="button" class="btn btn-primary w-100" @onclick="FindFlight"
 		style="white-space: nowrap;">Find flights</button>
 	</div>
 </form>
@@ -27,34 +28,17 @@
 </div>
 <div class="form-group flex-grow-1">
 	<select class="form-control">
-@* 		@foreach (var item in reservations)
+		@* 		@foreach (var item in reservations)
 		{
 			<option value="@item">@item</option>
 		} *@
 	</select>
 </div>
 
-@* @code {
-	public class Reservation 
-	{
-		public string ReservationCode { get; set; } 
-		public string Airline { get; set; } 
-		public string FullName { get; set; } 
-	} 
-
-	private List<Reservation> reservations = new List<Reservation>(); 
-
-	public string filePath = "flights.csv"; 
-
-	private string FindReservation(string reservationCode, string airline, string fullName) 
-	{ 
-		if (string.IsNullOrWhiteSpace(reservationCode) && string.IsNullOrWhiteSpace(airline) && string.IsNullOrWhiteSpace(fullName)) 
-		{
-			return reservations;
-		}
-	}
-
-}   *@
+@code {
+	FlightSearch flight = new FlightSearch();
+	List<Flight> flightList = FlightSearch.GetFlights();
+}  
 
 
 
