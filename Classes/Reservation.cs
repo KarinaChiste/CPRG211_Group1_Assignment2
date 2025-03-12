@@ -19,15 +19,15 @@ namespace CPRG211_Group1_Assignment2.Classes
         {
            if (flight == null)
             {
-                throw new EmptyFieldException();
+                throw new EmptyFieldException("Flight");
             }
            else if (string.IsNullOrWhiteSpace(name))
             {
-                throw new EmptyFieldException();
+                throw new EmptyFieldException("Name");
             }
             else if (string.IsNullOrWhiteSpace(citizenship))
             {
-                throw new EmptyFieldException();
+                throw new EmptyFieldException("Citizenship");
             }
             else
             {
