@@ -10,34 +10,6 @@ namespace CPRG211_Group1_Assignment2.Classes
 {
     public class ReservationManager
     {
-        public List<Reservation> FindReservation(string? reservationCode, string? airline, string? name)
-        {
-            List<Reservation> reservations = new List<Reservation>();
-
-            if (File.Exists("reservations.json"))
-            {
-                string jsonData = File.ReadAllText("reservations.json");
-
-                if (!string.IsNullOrEmpty(jsonData))
-                {
-                    reservations = JsonSerializer.Deserialize<List<Reservation>>(jsonData);
-
-                    if (reservations == null)
-                    {
-                        reservations = new List<Reservation>();
-                    }
-                }
-            }
-
-            var filteredReservations = reservations.Where(r =>
-                (string.IsNullOrEmpty(reservationCode) || r.ReservationCode.Contains(reservationCode, StringComparison.OrdinalIgnoreCase)) &&
-                (string.IsNullOrEmpty(airline) || r.Airline.Contains(airline, StringComparison.OrdinalIgnoreCase)) &&
-                (string.IsNullOrEmpty(name) || r.FullName.Contains(name, StringComparison.OrdinalIgnoreCase)) // Changed Name to FullName
-             ).ToList();
-
-            return filteredReservations;
-        }
-
 
         public Reservation makeReservation(Flight flight, string name, string citizenship)
         {
