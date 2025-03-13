@@ -10,8 +10,6 @@ namespace CPRG211_Group1_Assignment2.Classes
 {
     public class ReservationManager
     {
-
-
         public Reservation makeReservation(Flight flight, string name, string citizenship)
         {
             if (flight.Capacity == 0)
@@ -24,7 +22,7 @@ namespace CPRG211_Group1_Assignment2.Classes
                 flight.Capacity--;
                 JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
                 string jsonString = JsonSerializer.Serialize(reservation, options);
-                File.AppendAllText("reservations.json", jsonString);
+                File.AppendAllText(@"..\..\..\Data\reservations.json", jsonString);
                 return reservation;
             }
         }

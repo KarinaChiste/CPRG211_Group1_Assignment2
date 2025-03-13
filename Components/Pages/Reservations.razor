@@ -1,4 +1,11 @@
 ﻿@page "/reservations"
+@using CPRG211_Group1_Assignment2.Classes;
+
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Text;
+@using System.Text.Json;
+@using System.Threading.Tasks;
 
 <div class="text-center">
 	<h5>Reservation Finder</h5>
@@ -18,15 +25,58 @@
 	</div>
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
 		<button type="submit" class="btn btn-primary w-100"
-				style="white-space: nowrap;">
+		style="white-space: nowrap;">
 			Find reservations
 		</button>
 	</div>
 </form>
-
+@*
 <div class="text-center mt-4">
 	<h5>Reservations</h5>
 </div>
 <div class="form-group flex-grow-1">
 	<input type="text" class="form-control" id="searchDisplay" placeholder="Loading...">
 </div>
+*@
+
+<div class="text-center mt-4">
+	<h5>Modify a reservation</h5>
+</div>
+<div class="form-group">
+	<select class="form-select">
+		<option value="">"None"</option>
+		@foreach (Reservation r in reservations)
+		{
+			<option value="@r">@r.ToString()</option>
+		}
+	</select>
+</div>
+
+<div class="text-center mt-4">
+	<h5>Reserve</h5>
+</div>
+<div class="form-group flex-grow-1">
+	<label for="ReservationCode">Reservation Code</label>
+	<input type="text" class="form-control" id="ReservationCode" placeholder="code">
+</div>
+
+@code{
+	public static List<Reservation> getReservations()
+	{
+		string jsonData = File.ReadAllText(@"..\..\..\..\Data\reservations.json");
+		JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+		Console.WriteLine($"{jsonData}");
+
+		try
+		{
+			List<Reservation> reservations = JsonSerializer.Deserialize<List<Reservation>>(jsonData, options);
+			return reservations;
+		}
+		catch(Exception)
+		{
+			List<Reservation> reservations = new List<Reservation>();
+			return reservations;
+		}
+	}
+	List<Reservation> reservations = getReservations();
+}
