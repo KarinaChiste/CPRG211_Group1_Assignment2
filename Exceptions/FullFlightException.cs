@@ -8,5 +8,6 @@ namespace CPRG211_Group1_Assignment2.Exceptions
 {
     public class FullFlightException : Exception
     {
+        public FullFlightException(): base("Full Flight, can't book ticket") { }
     }
 }

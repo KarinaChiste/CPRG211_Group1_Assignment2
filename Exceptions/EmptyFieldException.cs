@@ -8,6 +8,6 @@ namespace CPRG211_Group1_Assignment2.Exceptions
 {
     public class EmptyFieldException : Exception
     {
-
+        public EmptyFieldException(string field):base($"{field} must be entered") { }
     }
 }
