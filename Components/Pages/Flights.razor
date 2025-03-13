@@ -29,12 +29,23 @@
 <div class="text-center mt-4">
     <h5>Flights</h5>
 </div>
+
 <div class="form-group">
     <select class="form-select">
         @foreach (Flight flight in flights)
         {
-            <option value="@flight">@flight.ToString()</option>
+            <option selected value="@flight">@flight.ToString()</option>
+
+            flightCode = flight.FlightCode;
+            airline = flight.Airline;
+            day = flight.Day;
+            time = flight.DepartureTime;
+            cost = flight.Price;
+
+
+
         }
+     
     </select>
 
 </div>
@@ -44,9 +55,44 @@
 </div>
 
 <div>
-    <label>Flight code:</label>
-    <input type="text" readonly placeholder="Flight" />
+    <label for="FlightCode">Flight code:</label>
+    <input type="text" readonly placeholder="Flight" style="width:100%" name="flightCode" value="@flightCode"  />
 </div>
+
+<div>
+    <label>Airline:</label>
+    <input type="text" readonly placeholder="Airline" style="width:100%"  name="airline" value="@airline"/>
+</div>
+
+<div>
+    <label>Day:</label>
+    <input type="text" readonly placeholder="Day" style="width:100%" name="day" value="@day" />
+</div>
+
+<div>
+    <label>Time:</label>
+    <input type="text" readonly placeholder="Time" style="width:100%" name="time" value="@time"/>
+</div>
+
+<div>
+    <label>Cost:</label>
+    <input type="text" readonly placeholder="0" style="width:100%" name="cost" value="@cost" />
+</div>
+
+<div>
+    <label>Name:</label>
+    <input type="text" placeholder="Name" style="width:100%" name="name" />
+</div>
+
+<div>
+    <label>Citizenship:</label>
+    <input type="text" placeholder="Citizenship" style="width:100%" name="citizenship"/>
+</div>
+
+<div style="width: 25%; align-self:center; ">
+    <button type="submit" class="btn btn-primary w-100 " style="width:25%">Reserve</button>
+</div>
+
 
 
 @code {
@@ -54,17 +100,30 @@
     private string to;
     private string day;
 
+    private string flightCode;
+    private string airline;
+    private string time;
+    private string cost;
+
     private FlightSearch flightSearch = new FlightSearch();
     private List<Flight> flights = new List<Flight>();
 
     private void FindFlights()
     {
         flights = FlightSearch.GetFlights().Where(item =>
-		       (string.IsNullOrWhiteSpace(from) || item.OriginAirport.Equals(from, StringComparison.OrdinalIgnoreCase)) &&
-		       (string.IsNullOrWhiteSpace(to) || item.DestAirport.Equals(to, StringComparison.OrdinalIgnoreCase)) &&
-		       (string.IsNullOrWhiteSpace(day) || item.Day.Equals(day, StringComparison.OrdinalIgnoreCase))
-		       ).ToList();
-	}
+               (string.IsNullOrWhiteSpace(from) || item.OriginAirport.Equals(from, StringComparison.OrdinalIgnoreCase)) &&
+               (string.IsNullOrWhiteSpace(to) || item.DestAirport.Equals(to, StringComparison.OrdinalIgnoreCase)) &&
+               (string.IsNullOrWhiteSpace(day) || item.Day.Equals(day, StringComparison.OrdinalIgnoreCase))
+               ).ToList();
+    }
+
+    private void NewFlightReservation()
+    {
+        
+
+    }
+
+
 }  
 
 

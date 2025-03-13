@@ -10,7 +10,7 @@ namespace CPRG211_Group1_Assignment2.Classes
 {
     public class Reservation:Flight
     {
-
+        
 
         public string ReservationCode { get; set; }
 
