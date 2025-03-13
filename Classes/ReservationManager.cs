@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using CPRG211_Group1_Assignment2.Exceptions;
 
@@ -11,7 +12,7 @@ namespace CPRG211_Group1_Assignment2.Classes
     {
 
 
-        public void makeReservation(Flight flight, string name, string citizenship)
+        public Reservation makeReservation(Flight flight, string name, string citizenship)
         {
             if (flight.Capacity == 0)
             {
@@ -21,6 +22,10 @@ namespace CPRG211_Group1_Assignment2.Classes
             {
                 Reservation reservation = new Reservation(flight.FlightCode, flight.Airline, flight.OriginAirport, flight.DestAirport, flight.Day, flight.DepartureTime,flight.Capacity, flight.Price, GenerateReservationCode(), name, citizenship);
                 flight.Capacity--;
+                JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+                string jsonString = JsonSerializer.Serialize(reservation, options);
+                File.AppendAllText("reservations.json", jsonString);
+                return reservation;
             }
         }
         public string GenerateReservationCode()
