@@ -8,13 +8,14 @@ namespace CPRG211_Group1_Assignment2.Classes
 {
     public class Flight
     {
-        public string ReservationCode { get; set; }
+        private int capacity;
+        public string FlightCode { get; set; }
         public string Airline { get; set; }
         public string OriginAirport { get; set; } = string.Empty;
         public string DestAirport { get; set; } = string.Empty;
         public string Day { get; set; } = string.Empty;
         public string DepartureTime { get; set; }
-        public string Capacity { get; set; }
+        public int Capacity { get { return capacity; } set { capacity = value; } }
         public string Price { get; set; }
 
         //public Flight()
@@ -22,10 +23,10 @@ namespace CPRG211_Group1_Assignment2.Classes
 
         //}
 
-        public Flight (string reservationCode, string airline, string originAirport, string destAirport, 
-            string day, string departureTime, string capacity, string price)
+        public Flight (string flightCode, string airline, string originAirport, string destAirport, 
+            string day, string departureTime, int capacity, string price)
         {
-            ReservationCode = reservationCode;
+            FlightCode = flightCode;
             Airline = airline;
             OriginAirport = originAirport;
             DestAirport = destAirport;
@@ -37,7 +38,7 @@ namespace CPRG211_Group1_Assignment2.Classes
 
         public override string ToString()
         {
-            return ReservationCode + ", " +
+            return FlightCode + ", " +
                    Airline + ", " +
                    OriginAirport + ", " +
                    DestAirport + ", " +

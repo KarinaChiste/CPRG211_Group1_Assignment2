@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CPRG211_Group1_Assignment2.Exceptions;
 
 namespace CPRG211_Group1_Assignment2.Classes
 {
@@ -10,14 +11,18 @@ namespace CPRG211_Group1_Assignment2.Classes
     {
 
 
-        //public Reservation makeReservation(Flight flight, string name, string citizenship)
-        //{
-        //    if(flightCapacity == 0)
-        //    {
-        //        throw new FullFlightException();
-        //    }
-            
-        //}
+        public void makeReservation(Flight flight, string name, string citizenship)
+        {
+            if (flight.Capacity == 0)
+            {
+                throw new FullFlightException();
+            }
+            else
+            {
+                Reservation reservation = new Reservation(flight.FlightCode, flight.Airline, flight.OriginAirport, flight.DestAirport, flight.Day, flight.DepartureTime,flight.Capacity, flight.Price, GenerateReservationCode(), name, citizenship);
+                flight.Capacity--;
+            }
+        }
         public string GenerateReservationCode()
         {
             while (true)

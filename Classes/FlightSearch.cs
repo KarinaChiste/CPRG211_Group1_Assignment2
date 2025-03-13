@@ -34,7 +34,7 @@ namespace CPRG211_Group1_Assignment2.Classes
             {
                 line = sr.ReadLine()!;
                 details = line.Split(',');
-                flight = new Flight(details[0], details[1], details[2], details[3], details[4], details[5], details[6], details[7]);
+                flight = new Flight(details[0], details[1], details[2], details[3], details[4], details[5], int.Parse(details[6]), details[7]);
                 flights.Add(flight);
             }
             sr.Close();
