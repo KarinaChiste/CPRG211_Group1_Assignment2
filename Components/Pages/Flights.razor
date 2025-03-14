@@ -86,16 +86,17 @@
 
 <div>
     <label>Name:</label>
-    <input type="text" placeholder="Name" style="width:100%" name="name" />
+    <input type="text" placeholder="Name" style="width:100%" name="name" @bind="name"/>
 </div>
 
 <div>
     <label>Citizenship:</label>
-    <input type="text" placeholder="Citizenship" style="width:100%" name="citizenship"/>
+    <input type="text" placeholder="Citizenship" style="width:100%" name="citizenship" @bind="citizenship"/>
 </div>
 
-<div style="width: 25%; align-self:center; ">
-    <button type="submit" class="btn btn-primary w-100 " style="width:25%">Reserve</button>
+<div style="width: 25%; justify-self:center; padding:10px ">
+    <button type="button" class="btn btn-primary w-100 " @onclick="MakeReservation">Reserve</button>
+    <p> Reservation Code: <span> @reserveCode</span></p>
 </div>
 
 
@@ -110,11 +111,19 @@
     private string airline;
     private string time;
     private string cost;
+    private int capacity;
+    private string airport1;
+    private string airport2;
 
     public string flight;
 
     public int chosenFlight = 1;
     public string[] flightDetails;
+
+    public string name;
+    public string citizenship;
+
+    public string reserveCode = string.Empty;
 
     // private List<Flight> selectedFlights = new List<Flight>();
 
@@ -149,14 +158,24 @@
             flightDetails =theFlight.Split(",");
             flightCode = flightDetails[0];
             airline = flightDetails[1];
+            airport1 = flightDetails[2];
+            airport2 = flightDetails[3];
             chosenday = flightDetails[4];
             time = flightDetails[5];
+            capacity = int.Parse(flightDetails[6]);
             cost = flightDetails[7];
+
         }
-        else
-        {
-            
-        }
+
+    }
+
+    public void MakeReservation()
+    {
+        ReservationManager reserve = new ReservationManager();
+        Flight myFlight = new Flight(flightCode, airline, chosenday, time, cost, capacity);
+        Reservation reservation = reserve.makeReservation(myFlight, name, citizenship);
+        reserveCode = reservation.ReservationCode;
+
     }
 
 
