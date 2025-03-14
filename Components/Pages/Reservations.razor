@@ -53,6 +53,7 @@
 	<h5>Modify a reservation</h5>
 </div>
 <div class="form-group">
+	<label id="reservation" for="reservation">Reservation</label>
 	<select class="form-select">
 		@if (reservations.Count() < 1)
 		{
@@ -78,13 +79,13 @@
 		<input type="text" class="form-control" id="Citizenship" placeholder="text" @bind="newCitizenship">
 	</div>
 	<div>
-		<button type="submit" class="btn btn-primary w-100"
+		<button type="submit" class="btn btn-primary w-100 text-center mt-4"
 				style="white-space: nowrap;" @onclick="ModifyReservation">
 			Update
 		</button>
 		@if (valuesValid == false)
 		{
-			<a>Please make sure all fields are filled out correctly.</a>
+			<p class="text-center mt-4">Please make sure all fields are filled out correctly.</p>
 		}
 	</div>
 </div>
@@ -126,7 +127,7 @@
 		{
 			valuesValid = false;
 		}
-		else if (reservation.ToString() == "")
+		else if (reservation == null)
 		{
 			valuesValid = false;
 		}
@@ -151,6 +152,10 @@
 
 					reservation.FullName = newName;
 					reservation.Citizenship = newCitizenship;
+
+					JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
+					string jsonString = JsonSerializer.Serialize(reservations, options);
+					File.AppendAllText(@"..\..\..\Data\reservations.json", jsonString);
 				}
 			}
 			if (flightCodeValid == false)
