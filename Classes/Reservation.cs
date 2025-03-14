@@ -25,6 +25,10 @@ namespace CPRG211_Group1_Assignment2.Classes
             {
                 throw new EmptyFieldException("Flight");
             }
+           else if(capacity == 0)
+            {
+                throw new FullFlightException();
+            }
            else if (string.IsNullOrWhiteSpace(name))
             {
                 throw new EmptyFieldException("Name");
