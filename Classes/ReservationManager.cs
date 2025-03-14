@@ -25,7 +25,7 @@ namespace CPRG211_Group1_Assignment2.Classes
                 reservations.Add(reservation);
                 JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
                 string jsonString = JsonSerializer.Serialize(reservations, options);
-                File.WriteAllText("reservations.json", jsonString);
+                File.WriteAllText("..\..\..\..\Data\reservations.json", jsonString);
                 return reservation;
             }
         }
