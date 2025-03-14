@@ -34,7 +34,7 @@ namespace CPRG211_Group1_Assignment2.Classes
                 Random random = new Random();
                 string randomNumber = random.Next(0, 9999).ToString("D4");
                 string potentialCode = "F" + randomNumber;
-                StreamReader reader = new StreamReader(@"..\..\..\Data\ReservationCodes.txt");
+                StreamReader reader = new StreamReader(@"..\..\..\..\Data\ReservationCodes.txt");
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
@@ -47,7 +47,7 @@ namespace CPRG211_Group1_Assignment2.Classes
                 reader.Close();
                 if (valid == "Y")
                 {
-                    StreamWriter writer = File.AppendText(@"..\..\..\Data\ReservationCodes.txt");
+                    StreamWriter writer = File.AppendText(@"..\..\..\..\Data\ReservationCodes.txt");
                     writer.WriteLine(potentialCode);
                     writer.Close();
                     return potentialCode;

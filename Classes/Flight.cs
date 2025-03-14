@@ -18,10 +18,16 @@ namespace CPRG211_Group1_Assignment2.Classes
         public int Capacity { get { return capacity; } set { capacity = value; } }
         public string Price { get; set; }
 
-        //public Flight()
-        //{
+        public Flight(string flightCode, string airline, string day, string time, string price, int capacity)
+        {
+            this.FlightCode = flightCode;
+            this.Airline = airline;
+            this.Day = day;
+            this.Price = price;
+            this.DepartureTime = time;
+            this.Capacity = capacity;
 
-        //}
+        }
 
         public Flight (string flightCode, string airline, string originAirport, string destAirport, 
             string day, string departureTime, int capacity, string price)
