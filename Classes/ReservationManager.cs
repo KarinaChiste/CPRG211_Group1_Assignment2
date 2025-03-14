@@ -10,21 +10,19 @@ namespace CPRG211_Group1_Assignment2.Classes
 {
     public class ReservationManager
     {
+        List<Reservation> reservations;
+
         public Reservation makeReservation(Flight flight, string name, string citizenship)
         {
-            if (flight.Capacity == 0)
-            {
-                throw new FullFlightException();
-            }
-            else
-            {
+            
                 Reservation reservation = new Reservation(flight.FlightCode, flight.Airline, flight.OriginAirport, flight.DestAirport, flight.Day, flight.DepartureTime,flight.Capacity, flight.Price, GenerateReservationCode(), name, citizenship);
                 flight.Capacity--;
+                reservations.Add(reservation);
                 JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
-                string jsonString = JsonSerializer.Serialize(reservation, options);
-                File.AppendAllText(@"..\..\..\Data\reservations.json", jsonString);
+                string jsonString = JsonSerializer.Serialize(reservations, options);
+                File.WriteAllText("reservations.json", jsonString);
                 return reservation;
-            }
+           
         }
         public string GenerateReservationCode()
         {
