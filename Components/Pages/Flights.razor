@@ -36,7 +36,6 @@
             <option value="@flight">@flight.ToString()</option>
         }
     </select>
-
 </div>
 
 <div class="text-center mt-4">
@@ -59,12 +58,19 @@
 
     private void FindFlights()
     {
+        if (string.IsNullOrWhiteSpace(from) && string.IsNullOrWhiteSpace(to) && string.IsNullOrWhiteSpace(day))
+        {
+            flights.Clear();
+            return;
+        }
+
         flights = FlightSearch.GetFlights().Where(item =>
-		       (string.IsNullOrWhiteSpace(from) || item.OriginAirport.Equals(from, StringComparison.OrdinalIgnoreCase)) &&
-		       (string.IsNullOrWhiteSpace(to) || item.DestAirport.Equals(to, StringComparison.OrdinalIgnoreCase)) &&
-		       (string.IsNullOrWhiteSpace(day) || item.Day.Equals(day, StringComparison.OrdinalIgnoreCase))
-		       ).ToList();
-	}
+               (string.IsNullOrWhiteSpace(from) || item.OriginAirport.Equals(from, StringComparison.OrdinalIgnoreCase)) &&
+               (string.IsNullOrWhiteSpace(to) || item.DestAirport.Equals(to, StringComparison.OrdinalIgnoreCase)) &&
+               (string.IsNullOrWhiteSpace(day) || item.Day.Equals(day, StringComparison.OrdinalIgnoreCase))
+               ).ToList();
+    }
+
 }  
 
 
