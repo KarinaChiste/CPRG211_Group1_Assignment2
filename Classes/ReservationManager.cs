@@ -22,7 +22,7 @@ namespace CPRG211_Group1_Assignment2.Classes
                 flight.Capacity--;
                 JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
                 string jsonString = JsonSerializer.Serialize(reservation, options);
-                File.AppendAllText(@"..\..\..\Data\reservations.json", jsonString);
+                File.AppendAllText(@"..\..\..\..\Data\reservations.json", jsonString);
                 return reservation;
             }
         }

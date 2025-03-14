@@ -6,22 +6,27 @@ using System.Threading.Tasks;
 
 namespace CPRG211_Group1_Assignment2.Classes
 {
+    // FlightSearch class
     public class FlightSearch
     {
+        // access flights.csv file
         private static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
             @"..\..\..\..\Data\flights.csv");
         public static List<Flight> flights = new List<Flight>();
 
+        // class calls PopulateFlights method
         public FlightSearch()
         {
             PopulateFlights();
         }
 
+        // GetFlights method to return flights from Flight list 
         public static List<Flight> GetFlights()
         {
             return flights;
         }
 
+        // PopulateFlights method to parse flights from flights.csv into Flight list
         public void PopulateFlights()
         {
             flights.Clear();
