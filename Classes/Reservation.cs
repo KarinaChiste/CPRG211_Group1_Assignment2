@@ -10,13 +10,12 @@ namespace CPRG211_Group1_Assignment2.Classes
 {
     public class Reservation:Flight
     {
-        
+
+
 
         public string ReservationCode { get; set; }
-
         public string FullName { get; set; }
         public string Citizenship { get; set; }
-
 
         public Reservation(string flightCode, string airline, string originAirport, string destAirport,
             string day, string departureTime, int capacity, string price, string reservationCode, string name, string citizenship) : 
@@ -39,12 +38,7 @@ namespace CPRG211_Group1_Assignment2.Classes
                 ReservationCode = reservationCode;
                 FullName = name;
                 Citizenship = citizenship;
-            }
-            
+            } 
         }
-
-
-
-
     }
 }
