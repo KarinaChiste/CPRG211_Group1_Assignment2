@@ -8,11 +8,8 @@ using CPRG211_Group1_Assignment2.Exceptions;
 
 namespace CPRG211_Group1_Assignment2.Classes
 {
-    public class Reservation:Flight
+    public class Reservation : Flight
     {
-
-
-
         public string ReservationCode { get; set; }
         public string FullName { get; set; }
         public string Citizenship { get; set; }
