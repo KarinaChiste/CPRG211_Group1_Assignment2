@@ -7,25 +7,25 @@
 @using System.Text.Json;
 @using System.Threading.Tasks;
 
+@*for search*@
 <div class="text-center">
 	<h5>Reservation Finder</h5>
 </div>
-<form class="d-flex gap-4" action="/action_page.php">
+<form class="d-flex gap-4">
 	<div class="form-group flex-grow-1">
 		<label for="code">Code:</label>
-		<input type="text" class="form-control" id="code" placeholder="Any">
+		<input type="text" class="form-control" id="code" placeholder="Any" @bind="searchResCode">
 	</div>
 	<div class="form-group flex-grow-1">
 		<label for="airline">Airline:</label>
-		<input type="text" class="form-control" id="airline" placeholder="Any">
+		<input type="text" class="form-control" id="airline" placeholder="Any" @bind="searchAirline">
 	</div>
 	<div class="form-group flex-grow-1">
 		<label for="name">Name:</label>
-		<input type="text" class="form-control" id="name" placeholder="Any">
+		<input type="text" class="form-control" id="name" placeholder="Any" @bind="searchName">
 	</div>
 	<div class="align-self-end flex-grow-1" style="width: 190px;">
-		<button type="submit" class="btn btn-primary w-100"
-				style="white-space: nowrap;">
+		<button type="button" class="btn btn-primary w-100" style="white-space: nowrap;" @onclick="FindReservations">
 			Find reservations
 		</button>
 	</div>
@@ -38,7 +38,7 @@
 	<select class="form-select">
 		@if (reservations.Count() < 1)
 		{
-			<option value="">"None"</option>
+			<option value="">Loading...</option>
 		}
 		@foreach (Reservation r in reservations)
 		{
@@ -48,16 +48,16 @@
 </div>
 
 
-
+@* for modify *@
 <div class="text-center mt-4">
 	<h5>Modify a reservation</h5>
 </div>
 <div class="form-group">
-	<label id="reservation" for="reservation">Reservation</label>
+	<label id="reservation" for="reservation">Reservation code</label>
 	<select class="form-select">
 		@if (reservations.Count() < 1)
 		{
-			<option value="">"None"</option>
+			<option value="">Reservation</option>
 		}
 		@foreach (Reservation r in reservations)
 		{
@@ -67,16 +67,28 @@
 </div>
 <div class="form-group flex-grow-1">
 	<div>
-		<label for="FlightCode">New Flight Code</label>
-		<input type="text" class="form-control" id="FlightCode" placeholder="code" @bind="newFlightCode">
+		<label for="FlightCode">Flight code</label>
+		<input type="text" class="form-control" id="FlightCode" placeholder="Flight code" @bind="newFlightCode">
 	</div>
 	<div>
-		<label for="Name">New Name</label>
-		<input type="text" class="form-control" id="Name" placeholder="Full Name" @bind="newName">
+		<label for="Airline">Airline</label>
+		<input type="text" class="form-control" id="Airline" placeholder="Airline" @bind="newFlightCode"readonly>
 	</div>
 	<div>
-		<label for="Citizenship">New Citizenship</label>
-		<input type="text" class="form-control" id="Citizenship" placeholder="text" @bind="newCitizenship">
+		<label for="Cost">Cost</label>
+		<input type="text" class="form-control" id="Cost" placeholder="Cost" @bind="newFlightCode">
+	</div>
+	<div>
+		<label for="Name">Name</label>
+		<input type="text" class="form-control" id="Full Name" placeholder="Full Name" @bind="newName" >
+	</div>
+	<div>
+		<label for="Citizenship">Citizenship</label>
+		<input type="text" class="form-control" id="Citizenship" placeholder="Citizenship" @bind="newCitizenship">
+	</div>
+	<div>
+		<label for="Status">Status</label>
+		<input type="text" class="form-control" id="Status" placeholder="Status" @bind="newCitizenship" readonly>
 	</div>
 	<div>
 		<button type="submit" class="btn btn-primary w-100 text-center mt-4"
@@ -90,17 +102,14 @@
 	</div>
 </div>
 
-
-
-
-
-
-
 @code {
 	public Reservation reservation;
 	public string newFlightCode;
 	public string newName;
 	public string newCitizenship;
+	public string searchResCode = "";
+	public string searchAirline = "";
+	public string searchName = "";
 
 	public bool valuesValid = true;
 
@@ -119,6 +128,7 @@
 			return reservations;
 		}
 	}
+
 	List<Reservation> reservations = GetReservations();
 
 	public void ModifyReservation()
@@ -163,5 +173,16 @@
 				valuesValid = false;
 			}
 		}
+	}
+
+	List<Reservation> searchReservations = new List<Reservation>();
+
+	public void FindReservations()
+	{
+		searchReservations = reservations.Where(item =>
+			(string.IsNullOrWhiteSpace(searchResCode) || item.ReservationCode.Contains(searchResCode, StringComparison.OrdinalIgnoreCase)) &&
+			(string.IsNullOrWhiteSpace(searchAirline) || item.Airline.Contains(searchAirline, StringComparison.OrdinalIgnoreCase)) &&
+			(string.IsNullOrWhiteSpace(searchName) || item.FullName.Contains(searchName, StringComparison.OrdinalIgnoreCase))
+		).ToList();
 	}
 }

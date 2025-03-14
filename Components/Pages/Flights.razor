@@ -181,10 +181,19 @@
 
     public void MakeReservation()
     {
-        ReservationManager reserve = new ReservationManager();
-        Flight myFlight = new Flight(flightCode, airline, chosenday, time, cost, capacity);
-        Reservation reservation = reserve.makeReservation(myFlight, name, citizenship);
-        reserveCode = reservation.ReservationCode;
+        try
+        {
+            ReservationManager reserve = new ReservationManager();
+            Flight myFlight = new Flight(flightCode, airline, chosenday, time, cost, capacity);
+            Reservation reservation = reserve.makeReservation(myFlight, name, citizenship);
+            reserveCode = reservation.ReservationCode;
+        }
+
+        catch (Exception ex)
+        {
+            reserveCode = ex.Message;
+        }
+        
 
     }
 

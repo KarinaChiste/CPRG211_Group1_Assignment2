@@ -1,0 +1,15 @@
+[
+  {
+    "ReservationCode": "F6097",
+    "FullName": "k",
+    "Citizenship": "k",
+    "FlightCode": "ST-5667",
+    "Airline": " Scaretransat",
+    "OriginAirport": "",
+    "DestAirport": "",
+    "Day": " Tuesday",
+    "DepartureTime": " 21:45",
+    "Capacity": 255,
+    "Price": " 743.00"
+  }
+]
