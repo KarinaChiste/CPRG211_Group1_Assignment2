@@ -1,0 +1,41 @@
+[
+  {
+    "ReservationCode": "F1002",
+    "FullName": "j",
+    "Citizenship": "j",
+    "FlightCode": "ST-5667",
+    "Airline": " Scaretransat",
+    "OriginAirport": "",
+    "DestAirport": "",
+    "Day": " Tuesday",
+    "DepartureTime": " 21:45",
+    "Capacity": 255,
+    "Price": " 743.00"
+  },
+  {
+    "ReservationCode": "F2833",
+    "FullName": "j",
+    "Citizenship": "s",
+    "FlightCode": "ST-5667",
+    "Airline": " Scaretransat",
+    "OriginAirport": "",
+    "DestAirport": "",
+    "Day": " Tuesday",
+    "DepartureTime": " 21:45",
+    "Capacity": 255,
+    "Price": " 743.00"
+  },
+  {
+    "ReservationCode": "F7060",
+    "FullName": "jo",
+    "Citizenship": "sk",
+    "FlightCode": "MA-7144",
+    "Airline": " Mediocre Airlines",
+    "OriginAirport": "",
+    "DestAirport": "",
+    "Day": " Sunday",
+    "DepartureTime": " 2:45",
+    "Capacity": 174,
+    "Price": " 1551.00"
+  }
+]
