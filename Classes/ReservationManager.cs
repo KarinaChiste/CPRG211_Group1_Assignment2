@@ -33,13 +33,11 @@ namespace CPRG211_Group1_Assignment2.Classes
 
         public Reservation makeReservation(Flight flight, string name, string citizenship)
         {
-
             Reservation reservation = new Reservation(flight.FlightCode, flight.Airline, flight.OriginAirport, flight.DestAirport, flight.Day, flight.DepartureTime, flight.Capacity, flight.Price, GenerateReservationCode(), name, citizenship);
             flight.Capacity--;
             reservations.Add(reservation);
             persist();
             return reservation;
-
         }
 
         public void persist()
@@ -80,7 +78,6 @@ namespace CPRG211_Group1_Assignment2.Classes
         }
 
     }
-
 }
 
 
