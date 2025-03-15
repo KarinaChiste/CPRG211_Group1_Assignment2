@@ -12,13 +12,42 @@ namespace CPRG211_Group1_Assignment2.Classes
     {
         private bool status;
         public string ReservationCode { get; set; }
-        public string FullName { get; set; }
-        public string Citizenship { get; set; }
+
+        private string fullName;
+
+        public string FullName
+        {
+            get => fullName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("FullName cannot be empty or whitespace.");
+                }
+                fullName = value;
+            }
+        }
+
+        private string citizenship;
+        public string Citizenship
+        {
+            get => citizenship;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new EmptyFieldException("Citizenship cannot be empty or whitespace.");
+                }
+                citizenship = value;
+            }
+        }
+
+        public string Status { get; set; }
 
         public bool Status {  get { return status; } set { status = value; } }
         public Reservation(string flightCode, string airline, string originAirport, string destAirport,
-            string day, string departureTime, int capacity, string price, string reservationCode, string name, string citizenship) : 
-            base( flightCode,  airline, originAirport, destAirport, day,  departureTime, capacity, price)
+            string day, string departureTime, int capacity, string price, string reservationCode, string fullName, string citizenship, string status = "Active") : 
+            base(flightCode, airline, originAirport, destAirport, day, departureTime, capacity, price)
         {
            if (flightCode == null)
             {
@@ -28,7 +57,7 @@ namespace CPRG211_Group1_Assignment2.Classes
             {
                 throw new FullFlightException();
             }
-           else if (string.IsNullOrWhiteSpace(name))
+           else if (string.IsNullOrWhiteSpace(fullName))
             {
                 throw new EmptyFieldException("Name");
             }
@@ -39,10 +68,28 @@ namespace CPRG211_Group1_Assignment2.Classes
             else
             {
                 ReservationCode = reservationCode;
-                FullName = name;
+                FullName = fullName;
                 Citizenship = citizenship;
-                Status = true;
+
+                Status = status;
+
             } 
+        }
+
+        public override string ToString()
+        {
+            return ReservationCode + ", " +
+                   FullName + ", " +
+                   Citizenship + ", " +
+                   Status + ", " +
+                   FlightCode + ", " +
+                   Airline + ", " +
+                   OriginAirport + ", " +
+                   DestAirport + ", " +
+                   Day + ", " +
+                   DepartureTime + ", " +
+                   Capacity + ", " +
+                   Price;
         }
     }
 }

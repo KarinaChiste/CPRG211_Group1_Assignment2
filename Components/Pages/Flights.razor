@@ -31,7 +31,7 @@
 </div>
 
 <div class="form-group">
-    <select  class="form-select" @onchange="FlightClick" >
+    <select class="form-select" @onchange="FlightClick">
 
         @foreach (Flight flight in flights) 
         {
@@ -43,13 +43,7 @@
             {
                 <option value="@flight">@flight.ToString()</option>
             }
-
-
-
-
-
         }
-
 
     </select>
 </div>
@@ -58,39 +52,40 @@
     <h5>Reserve</h5>
 </div>
 
+
 <div>
     <label for="FlightCode">Flight code:</label>
-    <input type="text" readonly placeholder="Flight" style="width:100%" name="flightCode" value="@flightCode"  />
+    <input type="text" class="form-control" readonly placeholder="Flight" style="width:100%" name="flightCode" value="@flightCode" />
 </div>
 
 <div>
     <label>Airline:</label>
-    <input type="text" readonly placeholder="Airline" style="width:100%"  name="airline" value="@airline"/>
+    <input type="text" class="form-control" readonly placeholder="Airline" style="width:100%" name="airline" value="@airline" />
 </div>
 
 <div>
     <label>Day:</label>
-    <input type="text" readonly placeholder="Day" style="width:100%" name="day" value="@chosenday" />
+    <input type="text" class="form-control" readonly placeholder="Day" style="width:100%" name="day" value="@chosenday" />
 </div>
 
 <div>
     <label>Time:</label>
-    <input type="text" readonly placeholder="Time" style="width:100%" name="time" value="@time"/>
+    <input type="text" class="form-control" readonly placeholder="Time" style="width:100%" name="time" value="@time" />
 </div>
 
 <div>
     <label>Cost:</label>
-    <input type="text" readonly placeholder="0" style="width:100%" name="cost" value="@cost" />
+    <input type="text" class="form-control" readonly placeholder="0" style="width:100%" name="cost" value="@cost" />
 </div>
 
 <div>
     <label>Name:</label>
-    <input type="text" placeholder="Name" style="width:100%" name="name" @bind="name"/>
+    <input type="text" class="form-control" placeholder="Name" style="width:100%" name="name" @bind="name" />
 </div>
 
 <div>
     <label>Citizenship:</label>
-    <input type="text" placeholder="Citizenship" style="width:100%" name="citizenship" @bind="citizenship"/>
+    <input type="text" class="form-control" placeholder="Citizenship" style="width:100%" name="citizenship" @bind="citizenship" />
 </div>
 
 <div style="width: 25%; justify-self:center; padding:10px ">
@@ -128,6 +123,7 @@
 
     private FlightSearch flightSearch = new FlightSearch();
     private List<Flight> flights = new List<Flight>();
+    private ReservationManager reserve = new ReservationManager();
 
     private void FindFlights()
     {
@@ -147,20 +143,22 @@
 
     public void FlightClick(ChangeEventArgs arg1)
     {
-        string myFlight = (string)arg1.Value;
-        FlightSet(myFlight);
+        if (arg1.Value is not null)
+        {
+            string myFlight = (string)arg1.Value;
+            FlightSet(myFlight);
+        }
         // airline = flight.Airline; 
         //         day = flight.Day;  
         //         time = flight.DepartureTime;  
         //        cost = flight.Price; 
-
     }
 
     public void FlightSet(string theFlight)
     {
         if(theFlight.Length != 0)
         {
-            flightDetails =theFlight.Split(",");
+            flightDetails =theFlight.Split(", ");
             flightCode = flightDetails[0];
             airline = flightDetails[1];
             airport1 = flightDetails[2];
@@ -169,17 +167,14 @@
             time = flightDetails[5];
             capacity = int.Parse(flightDetails[6]);
             cost = flightDetails[7];
-
         }
-
     }
 
     public void MakeReservation()
     {
         try
         {
-            ReservationManager reserve = new ReservationManager();
-            Flight myFlight = new Flight(flightCode, airline, chosenday, time, cost, capacity);
+            Flight myFlight = new Flight(flightCode, airline, airport1, airport2, chosenday, time, capacity, cost);
             Reservation reservation = reserve.makeReservation(myFlight, name, citizenship);
             reserveCode = reservation.ReservationCode;
         }
@@ -188,10 +183,7 @@
         {
             reserveCode = ex.Message;
         }
-        
-
     }
-
 
 }  
 
