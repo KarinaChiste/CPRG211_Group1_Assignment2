@@ -41,6 +41,7 @@ namespace CPRG211_Group1_Assignment2.Classes
             Capacity = capacity;
             Price = price;
         }
+        public Flight() { }
 
         public override string ToString()
         {

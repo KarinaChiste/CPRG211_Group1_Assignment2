@@ -10,14 +10,15 @@ namespace CPRG211_Group1_Assignment2.Classes
 {
     public class Reservation : Flight
     {
-        private bool status;
+        //private bool status;
         public string ReservationCode { get; set; }
         public string FullName { get; set; }
         public string Citizenship { get; set; }
 
-        public bool Status {  get { return status; } set { status = value; } }
+        public bool Status { get; set; }
+       public Reservation() { }
         public Reservation(string flightCode, string airline, string originAirport, string destAirport,
-            string day, string departureTime, int capacity, string price, string reservationCode, string name, string citizenship) : 
+            string day, string departureTime, int capacity, string price, string reservationCode, string name, string citizenship, bool status) : 
             base( flightCode,  airline, originAirport, destAirport, day,  departureTime, capacity, price)
         {
            if (flightCode == null)
@@ -38,10 +39,19 @@ namespace CPRG211_Group1_Assignment2.Classes
             }
             else
             {
-                ReservationCode = reservationCode;
-                FullName = name;
-                Citizenship = citizenship;
-                Status = true;
+                this.ReservationCode = reservationCode;
+                this.FullName = name;
+               this.Citizenship = citizenship;
+                this.Status = status;
+               this.FlightCode = flightCode;
+                this.Airline = airline;
+                this.OriginAirport = originAirport;
+                this.DestAirport = destAirport;
+                this.Day = day;
+                this.DepartureTime = departureTime;
+                this.Capacity = capacity;
+                this.Price = price;
+
             } 
         }
     }

@@ -36,10 +36,7 @@
 </div>
 <div class="form-group">
 	<select class="form-select">
-		@if (reservations.Count() < 1)
-		{
-			<option value="">Loading...</option>
-		}
+		
 		@foreach (Reservation r in reservations)
 		{
 			<option value="@r">@r.ToString()</option>
@@ -54,21 +51,12 @@
 </div>
 <div class="form-group">
 	<label id="reservation" for="reservation">Reservation code</label>
-	<select class="form-select">
-		@if (reservations.Count() < 1)
-		{
-			<option value="">Reservation</option>
-		}
-		@foreach (Reservation r in reservations)
-		{
-			<option value="@r" @bind="reservation">@r.ToString()</option>
-		}
-	</select>
+	<input type="text" class="form-control" id="FlightCode" placeholder="Reservation code" @bind="newFlightCode" readonly>
 </div>
 <div class="form-group flex-grow-1">
 	<div>
 		<label for="FlightCode">Flight code</label>
-		<input type="text" class="form-control" id="FlightCode" placeholder="Flight code" @bind="newFlightCode">
+		<input type="text" class="form-control" id="FlightCode" placeholder="Flight code" @bind="newFlightCode" readonly>
 	</div>
 	<div>
 		<label for="Airline">Airline</label>
@@ -76,7 +64,7 @@
 	</div>
 	<div>
 		<label for="Cost">Cost</label>
-		<input type="text" class="form-control" id="Cost" placeholder="Cost" @bind="newFlightCode">
+		<input type="text" class="form-control" id="Cost" placeholder="Cost" @bind="newFlightCode" readonly>
 	</div>
 	<div>
 		<label for="Name">Name</label>
@@ -88,11 +76,11 @@
 	</div>
 	<div>
 		<label for="Status">Status</label>
-		<input type="text" class="form-control" id="Status" placeholder="Status" @bind="newCitizenship" readonly>
+		<input type="text" class="form-control" id="Status" placeholder="Status" @bind="newCitizenship" >
 	</div>
 	<div>
 		<button type="submit" class="btn btn-primary w-100 text-center mt-4"
-				style="white-space: nowrap;" @onclick="ModifyReservation">
+		style="white-space: nowrap;" @onclick="ModifyReservation">
 			Update
 		</button>
 		@if (valuesValid == false)
@@ -112,24 +100,13 @@
 	public string searchName = "";
 
 	public bool valuesValid = true;
+	public ReservationManager manager = new ReservationManager();
 
-	public static List<Reservation> GetReservations()
-	{
-		var jsonData = File.ReadAllText(@"..\..\..\..\Data\reservations.json");
-		JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
-		try
-		{
-			List<Reservation> reservations = JsonSerializer.Deserialize<List<Reservation>>(jsonData, options);
-			return reservations;
-		}
-		catch (Exception)
-		{
-			List<Reservation> reservations = new List<Reservation>();
-			return reservations;
-		}
-	}
+	public List<Reservation> reservations = new List<Reservation>();
 
-	List<Reservation> reservations = GetReservations();
+
+
+
 
 	public void ModifyReservation()
 	{
@@ -179,6 +156,7 @@
 
 	public void FindReservations()
 	{
+		reservations = manager.GetReservations();
 		searchReservations = reservations.Where(item =>
 			(string.IsNullOrWhiteSpace(searchResCode) || item.ReservationCode.Contains(searchResCode, StringComparison.OrdinalIgnoreCase)) &&
 			(string.IsNullOrWhiteSpace(searchAirline) || item.Airline.Contains(searchAirline, StringComparison.OrdinalIgnoreCase)) &&
