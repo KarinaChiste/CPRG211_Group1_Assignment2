@@ -6,6 +6,11 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using CPRG211_Group1_Assignment2.Exceptions;
 
+/*Names: Karina, Ashton, Jasprit, Caden
+ * Date: March 14 2025 
+ * Assignment: CPRG211 Assignment 2
+ */
+
 //Find Reservations and Display Them, save to file
 namespace CPRG211_Group1_Assignment2.Classes
 {

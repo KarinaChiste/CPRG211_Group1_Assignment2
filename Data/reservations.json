@@ -68,5 +68,19 @@
     "DepartureTime": "21:45",
     "Capacity": 254,
     "Price": "743.00"
+  },
+  {
+    "ReservationCode": "F5533",
+    "FullName": "Tim",
+    "Citizenship": "Canadian",
+    "Status": "Inactive",
+    "FlightCode": "TB-4090",
+    "Airline": "Try a Bus Airways",
+    "OriginAirport": "AMS",
+    "DestAirport": "PVG",
+    "Day": "Wednesday",
+    "DepartureTime": "17:00",
+    "Capacity": 255,
+    "Price": "934.00"
   }
 ]
