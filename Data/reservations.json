@@ -1,103 +1,44 @@
 [
   {
-    "ReservationCode": "F5273",
-    "FullName": "j",
-    "Citizenship": "j",
+    "ReservationCode": "F4593",
+    "FullName": "Karina",
+    "Citizenship": "Kryptonian",
     "Status": "Active",
-    "FlightCode": "ST-5667",
-    "Airline": " Scaretransat",
-    "OriginAirport": "",
-    "DestAirport": "",
-    "Day": " Tuesday",
-    "DepartureTime": " 21:45",
-    "Capacity": 255,
-    "Price": " 743.00"
-  },
-  {
-    "ReservationCode": "F9019",
-    "FullName": "j",
-    "Citizenship": "k",
-    "Status": "Active",
-    "FlightCode": "ST-5667",
-    "Airline": " Scaretransat",
-    "OriginAirport": "",
-    "DestAirport": "",
-    "Day": " Tuesday",
-    "DepartureTime": " 21:45",
-    "Capacity": 255,
-    "Price": " 743.00"
-  },
-  {
-    "ReservationCode": "F3195",
-    "FullName": "j",
-    "Citizenship": "j",
-    "Status": "Active",
-    "FlightCode": "ST-5667",
-    "Airline": " Scaretransat",
-    "OriginAirport": "",
-    "DestAirport": "",
-    "Day": " Tuesday",
-    "DepartureTime": " 21:45",
-    "Capacity": 255,
-    "Price": " 743.00"
-  },
-  {
-    "ReservationCode": "F6093",
-    "FullName": "j",
-    "Citizenship": "k",
-    "Status": "Active",
-
-    "FlightCode": "ST-5667",
-    "Airline": " Scaretransat",
-    "OriginAirport": "",
-    "DestAirport": "",
-    "Day": " Tuesday",
-    "DepartureTime": " 21:45",
-    "Capacity": 255,
-    "Price": " 743.00"
-  },
-  {
-    "ReservationCode": "F2546",
-    "FullName": "j",
-    "Citizenship": "k",
-    "Status": "Active",
-    "FlightCode": "ST-5667",
-    "Airline": "Scaretransat",
-    "OriginAirport": "AMS",
-    "DestAirport": "PEK",
-    "Day": "Tuesday",
-    "DepartureTime": "21:45",
-    "Capacity": 255,
-    "Price": "743.00"
-  }
-][
-  {
-    "ReservationCode": "F2772",
-    "FullName": "test3",
-    "Citizenship": "r",
-    "Status": true,
-    "FlightCode": "GA-3303",
-    "Airline": " Gypped Air",
-    "OriginAirport": "",
-    "DestAirport": "",
-    "Day": " Monday",
-    "DepartureTime": " 14:45",
-    "Capacity": 174,
-    "Price": " 1210.00"
-  }
-][
-  {
-    "ReservationCode": "F3177",
-    "FullName": "w",
-    "Citizenship": "t",
-    "Status": true,
     "FlightCode": "OA-7734",
-    "Airline": " Otto Airlines",
-    "OriginAirport": "",
-    "DestAirport": "",
-    "Day": " Thursday",
-    "DepartureTime": " 11:45",
+    "Airline": "Otto Airlines",
+    "OriginAirport": "DEL",
+    "DestAirport": "YUL",
+    "Day": "Thursday",
+    "DepartureTime": "11:45",
     "Capacity": 292,
-    "Price": " 1285.00"
+    "Price": "1285.00"
+  },
+  {
+    "ReservationCode": "F6102",
+    "FullName": "biff",
+    "Citizenship": "buffy",
+    "Status": "Active",
+    "FlightCode": "OA-7734",
+    "Airline": "Otto Airlines",
+    "OriginAirport": "DEL",
+    "DestAirport": "YUL",
+    "Day": "Thursday",
+    "DepartureTime": "11:45",
+    "Capacity": 292,
+    "Price": "1285.00"
+  },
+  {
+    "ReservationCode": "F5264",
+    "FullName": "yay",
+    "Citizenship": "maybe",
+    "Status": "Active",
+    "FlightCode": "MA-7144",
+    "Airline": "Mediocre Airlines",
+    "OriginAirport": "YWG",
+    "DestAirport": "DEL",
+    "Day": "Sunday",
+    "DepartureTime": "2:45",
+    "Capacity": 174,
+    "Price": "1551.00"
   }
 ]

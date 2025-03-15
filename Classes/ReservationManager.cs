@@ -33,7 +33,10 @@ namespace CPRG211_Group1_Assignment2.Classes
 
         public Reservation makeReservation(Flight flight, string name, string citizenship)
         {
-
+            if(reservations.Count == 0)
+            {
+                PopulateReservations();
+            }
             Reservation reservation = new Reservation(flight.FlightCode, flight.Airline, flight.OriginAirport, flight.DestAirport, flight.Day, flight.DepartureTime, flight.Capacity, flight.Price, GenerateReservationCode(), name, citizenship);
             flight.Capacity--;
             reservations.Add(reservation);
@@ -44,9 +47,10 @@ namespace CPRG211_Group1_Assignment2.Classes
 
         public void persist()
         {
+            
             JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
             string jsonString = JsonSerializer.Serialize(reservations, options);
-
+            
             File.WriteAllText(@"..\..\..\..\Data\reservations.json", jsonString);
 
         }
