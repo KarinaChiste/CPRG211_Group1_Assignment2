@@ -8,15 +8,14 @@ using CPRG211_Group1_Assignment2.Exceptions;
 
 namespace CPRG211_Group1_Assignment2.Classes
 {
-    public class Reservation:Flight
+    public class Reservation : Flight
     {
-
-
-
+        private bool status;
         public string ReservationCode { get; set; }
         public string FullName { get; set; }
         public string Citizenship { get; set; }
 
+        public bool Status {  get { return status; } set { status = value; } }
         public Reservation(string flightCode, string airline, string originAirport, string destAirport,
             string day, string departureTime, int capacity, string price, string reservationCode, string name, string citizenship) : 
             base( flightCode,  airline, originAirport, destAirport, day,  departureTime, capacity, price)
@@ -42,6 +41,7 @@ namespace CPRG211_Group1_Assignment2.Classes
                 ReservationCode = reservationCode;
                 FullName = name;
                 Citizenship = citizenship;
+                Status = true;
             } 
         }
     }
