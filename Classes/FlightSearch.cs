@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+//Find Flights and Displays them
 namespace CPRG211_Group1_Assignment2.Classes
 {
     public class FlightSearch

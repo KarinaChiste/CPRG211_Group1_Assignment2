@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Creates Flight Object
 namespace CPRG211_Group1_Assignment2.Classes
 {
     public class Flight

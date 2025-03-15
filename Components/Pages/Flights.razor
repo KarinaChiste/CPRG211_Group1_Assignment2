@@ -174,9 +174,13 @@
     {
         try
         {
-            Flight myFlight = new Flight(flightCode, airline, airport1, airport2, chosenday, time, capacity, cost);
-            Reservation reservation = reserve.makeReservation(myFlight, name, citizenship);
-            reserveCode = reservation.ReservationCode;
+            //Flight myFlight = new Flight(flightCode, airline, airport1, airport2, chosenday, time, capacity, cost);
+            Flight? myFlight = FlightSearch.GetFlights().Find(item => item.FlightCode == flightCode);
+            if (myFlight is not null)
+            {
+                Reservation reservation = reserve.makeReservation(myFlight, name, citizenship);
+                reserveCode = reservation.ReservationCode;
+            }
         }
 
         catch (Exception ex)

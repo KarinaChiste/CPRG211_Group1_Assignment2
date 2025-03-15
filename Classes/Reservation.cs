@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CPRG211_Group1_Assignment2.Exceptions;
 
-
+// Creates Reservation Object
 namespace CPRG211_Group1_Assignment2.Classes
 {
     public class Reservation : Flight
