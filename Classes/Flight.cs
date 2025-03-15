@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace CPRG211_Group1_Assignment2.Classes
 {
-    // Flight object class 
     public class Flight
     {
-        // data
         private int capacity;
         public string FlightCode { get; set; }
         public string Airline { get; set; }
@@ -20,7 +18,6 @@ namespace CPRG211_Group1_Assignment2.Classes
         public int Capacity { get { return capacity; } set { capacity = value; } }
         public string Price { get; set; }
 
-        // constructor
         public Flight(string flightCode, string airline, string day, string time, string price, int capacity)
         {
             this.FlightCode = flightCode;
@@ -45,7 +42,6 @@ namespace CPRG211_Group1_Assignment2.Classes
             Price = price;
         }
 
-        // ToString to display flight info
         public override string ToString()
         {
             return FlightCode + ", " +

@@ -13,17 +13,40 @@ namespace CPRG211_Group1_Assignment2.Classes
         public static List<Reservation> reservations = new List<Reservation>();
         //List<Reservation> reservations;
 
+        public ReservationManager()
+        {
+            PopulateReservations();
+        }
+
+        public void PopulateReservations()
+        {
+            try
+            {
+                var jsonData = File.ReadAllText(@"..\..\..\..\Data\reservations.json");
+                reservations = JsonSerializer.Deserialize<List<Reservation>>(jsonData);
+            }
+            catch (Exception)
+            {
+                reservations = new List<Reservation>();
+            }
+        }
+
         public Reservation makeReservation(Flight flight, string name, string citizenship)
         {
 
             Reservation reservation = new Reservation(flight.FlightCode, flight.Airline, flight.OriginAirport, flight.DestAirport, flight.Day, flight.DepartureTime, flight.Capacity, flight.Price, GenerateReservationCode(), name, citizenship);
             flight.Capacity--;
             reservations.Add(reservation);
+            persist();
+            return reservation;
+
+        }
+
+        public void persist()
+        {
             JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
             string jsonString = JsonSerializer.Serialize(reservations, options);
             File.WriteAllText(@"..\..\..\..\Data\reservations.json", jsonString);
-            return reservation;
-
         }
 
         public string GenerateReservationCode()
@@ -54,8 +77,6 @@ namespace CPRG211_Group1_Assignment2.Classes
 
                 }
             }
-
-
         }
 
     }

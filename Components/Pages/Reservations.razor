@@ -35,12 +35,8 @@
 	<h5>Reservations</h5>
 </div>
 <div class="form-group">
-	<select class="form-select">
-		@if (reservations.Count() < 1)
-		{
-			<option value="">Loading...</option>
-		}
-		@foreach (Reservation r in reservations)
+	<select class="form-select" @onchange="ReservationChanged">
+		@foreach (Reservation r in searchReservations)
 		{
 			<option value="@r">@r.ToString()</option>
 		}
@@ -52,126 +48,111 @@
 <div class="text-center mt-4">
 	<h5>Modify a reservation</h5>
 </div>
-<div class="form-group">
-	<label id="reservation" for="reservation">Reservation code</label>
-	<select class="form-select">
-		@if (reservations.Count() < 1)
-		{
-			<option value="">Reservation</option>
-		}
-		@foreach (Reservation r in reservations)
-		{
-			<option value="@r" @bind="reservation">@r.ToString()</option>
-		}
-	</select>
-</div>
+
 <div class="form-group flex-grow-1">
 	<div>
+		<label for="ReservationCode">Reservation Code</label>
+		<input type="text" class="form-control" id="FlightCode" placeholder="Reservation Code" value="@ReservationCode" readonly>
+	</div>
+	<div>
 		<label for="FlightCode">Flight code</label>
-		<input type="text" class="form-control" id="FlightCode" placeholder="Flight code" @bind="newFlightCode">
+		<input type="text" class="form-control" id="FlightCode" placeholder="Flight Code" value="@FlightCode" readonly>
 	</div>
 	<div>
 		<label for="Airline">Airline</label>
-		<input type="text" class="form-control" id="Airline" placeholder="Airline" @bind="newFlightCode"readonly>
+		<input type="text" class="form-control" id="Airline" placeholder="Airline" value="@Airline" readonly>
 	</div>
 	<div>
 		<label for="Cost">Cost</label>
-		<input type="text" class="form-control" id="Cost" placeholder="Cost" @bind="newFlightCode">
+		<input type="text" class="form-control" id="Cost" placeholder="Cost" value="@Cost" readonly>
 	</div>
 	<div>
 		<label for="Name">Name</label>
-		<input type="text" class="form-control" id="Full Name" placeholder="Full Name" @bind="newName" >
+		<input type="text" class="form-control" id="Full Name" placeholder="Full Name" @bind="Name">
 	</div>
 	<div>
 		<label for="Citizenship">Citizenship</label>
-		<input type="text" class="form-control" id="Citizenship" placeholder="Citizenship" @bind="newCitizenship">
+		<input type="text" class="form-control" id="Citizenship" placeholder="Citizenship" @bind="Citizenship">
 	</div>
 	<div>
 		<label for="Status">Status</label>
-		<input type="text" class="form-control" id="Status" placeholder="Status" @bind="newCitizenship" readonly>
+		<select class="form-select" @bind="Status">
+			<option value="Active">Active</option>
+			<option value="Inactive">Inactive</option>
+		</select>
 	</div>
 	<div>
 		<button type="submit" class="btn btn-primary w-100 text-center mt-4"
-				style="white-space: nowrap;" @onclick="ModifyReservation">
+		style="white-space: nowrap;" @onclick="ModifyReservation">
 			Update
 		</button>
 		@if (valuesValid == false)
 		{
-			<p class="text-center mt-4">Please make sure all fields are filled out correctly.</p>
+			<p class="text-center mt-4">Please make sure all fields are filled out correctly. @errorMessage</p>
 		}
 	</div>
 </div>
 
 @code {
-	public Reservation reservation;
-	public string newFlightCode;
-	public string newName;
-	public string newCitizenship;
+	public string? ReservationCode { get; set; }
+	public string? FlightCode { get; set; }
+	public string? Airline { get; set; }
+	public string? Cost { get; set; }
+	public string? Name { get; set; }
+	public string? Citizenship { get; set; }
+	public string? Status { get; set; }
 	public string searchResCode = "";
 	public string searchAirline = "";
 	public string searchName = "";
 
 	public bool valuesValid = true;
+	public string errorMessage = "";
 
-	public static List<Reservation> GetReservations()
+	ReservationManager reservationManager = new ReservationManager();
+
+	private void ReservationChanged(ChangeEventArgs e)
 	{
-		var jsonData = File.ReadAllText(@"..\..\..\..\Data\reservations.json");
-		JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
-		try
+		if (e.Value is not null)
 		{
-			List<Reservation> reservations = JsonSerializer.Deserialize<List<Reservation>>(jsonData, options);
-			return reservations;
-		}
-		catch (Exception)
-		{
-			List<Reservation> reservations = new List<Reservation>();
-			return reservations;
+			string str = (string)e.Value;
+			SetReservation(str);
 		}
 	}
 
-	List<Reservation> reservations = GetReservations();
+	private void SetReservation(string theReservation)
+	{
+		if (theReservation.Length != 0)
+		{
+			string[] strArray = theReservation.Split(", ");
+			ReservationCode = strArray[0];
+			Name = strArray[1];
+			Citizenship = strArray[2];
+			Status = strArray[3];
+			FlightCode = strArray[4];
+			Airline = strArray[5];
+			Cost = strArray[11];
+		}
+	}
 
 	public void ModifyReservation()
 	{
-		if (string.IsNullOrWhiteSpace(newFlightCode) || string.IsNullOrWhiteSpace(newName) || string.IsNullOrWhiteSpace(newCitizenship))
+		try
+		{
+			Reservation? reservation = ReservationManager.reservations.Find(item => item.ReservationCode == ReservationCode);
+			if (reservation is not null)
+			{
+				reservation.FullName = Name;
+				reservation.Citizenship = Citizenship;
+				reservation.Status = Status;
+
+				valuesValid = true;
+				reservationManager.persist();
+			}
+		}
+		catch (Exception e)
 		{
 			valuesValid = false;
-		}
-		else if (reservation == null)
-		{
-			valuesValid = false;
-		}
-		else
-		{
-			bool flightCodeValid = false;
-			foreach (var line in @"../../../../flights.csv")
-			{
-				string[] field = line.ToString().Split(separator: ',');
-				if (field[0] == newFlightCode && flightCodeValid == false)
-				{
-					flightCodeValid = true;
-					valuesValid = true;
-					reservation.FlightCode = field[0];
-					reservation.Airline = field[1];
-					reservation.OriginAirport = field[2];
-					reservation.DestAirport = field[3];
-					reservation.Day = field[4];
-					reservation.DepartureTime = field[5];
-					reservation.Capacity = Convert.ToInt32(field[6]);
-					reservation.Price = field[7];
-
-					reservation.FullName = newName;
-					reservation.Citizenship = newCitizenship;
-
-					JsonSerializerOptions options = new JsonSerializerOptions { WriteIndented = true };
-					string jsonString = JsonSerializer.Serialize(reservations, options);
-					File.AppendAllText(@"..\..\..\Data\reservations.json", jsonString);
-				}
-			}
-			if (flightCodeValid == false)
-			{
-				valuesValid = false;
-			}
+			errorMessage = e.Message;
 		}
 	}
 
@@ -179,10 +160,11 @@
 
 	public void FindReservations()
 	{
-		searchReservations = reservations.Where(item =>
+		searchReservations = ReservationManager.reservations.Where(item =>
 			(string.IsNullOrWhiteSpace(searchResCode) || item.ReservationCode.Contains(searchResCode, StringComparison.OrdinalIgnoreCase)) &&
 			(string.IsNullOrWhiteSpace(searchAirline) || item.Airline.Contains(searchAirline, StringComparison.OrdinalIgnoreCase)) &&
 			(string.IsNullOrWhiteSpace(searchName) || item.FullName.Contains(searchName, StringComparison.OrdinalIgnoreCase))
 		).ToList();
+		if (searchReservations.Count != 0) SetReservation(searchReservations[0].ToString());
 	}
 }
