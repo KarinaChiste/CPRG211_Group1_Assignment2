@@ -46,6 +46,7 @@
     "FullName": "j",
     "Citizenship": "k",
     "Status": "Active",
+
     "FlightCode": "ST-5667",
     "Airline": " Scaretransat",
     "OriginAirport": "",
@@ -68,5 +69,35 @@
     "DepartureTime": "21:45",
     "Capacity": 255,
     "Price": "743.00"
+  }
+][
+  {
+    "ReservationCode": "F2772",
+    "FullName": "test3",
+    "Citizenship": "r",
+    "Status": true,
+    "FlightCode": "GA-3303",
+    "Airline": " Gypped Air",
+    "OriginAirport": "",
+    "DestAirport": "",
+    "Day": " Monday",
+    "DepartureTime": " 14:45",
+    "Capacity": 174,
+    "Price": " 1210.00"
+  }
+][
+  {
+    "ReservationCode": "F3177",
+    "FullName": "w",
+    "Citizenship": "t",
+    "Status": true,
+    "FlightCode": "OA-7734",
+    "Airline": " Otto Airlines",
+    "OriginAirport": "",
+    "DestAirport": "",
+    "Day": " Thursday",
+    "DepartureTime": " 11:45",
+    "Capacity": 292,
+    "Price": " 1285.00"
   }
 ]

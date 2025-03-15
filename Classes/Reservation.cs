@@ -10,6 +10,7 @@ namespace CPRG211_Group1_Assignment2.Classes
 {
     public class Reservation : Flight
     {
+        private bool status;
         public string ReservationCode { get; set; }
 
         private string fullName;
@@ -43,6 +44,7 @@ namespace CPRG211_Group1_Assignment2.Classes
 
         public string Status { get; set; }
 
+        public bool Status {  get { return status; } set { status = value; } }
         public Reservation(string flightCode, string airline, string originAirport, string destAirport,
             string day, string departureTime, int capacity, string price, string reservationCode, string fullName, string citizenship, string status = "Active") : 
             base(flightCode, airline, originAirport, destAirport, day, departureTime, capacity, price)
@@ -68,7 +70,9 @@ namespace CPRG211_Group1_Assignment2.Classes
                 ReservationCode = reservationCode;
                 FullName = fullName;
                 Citizenship = citizenship;
+
                 Status = status;
+
             } 
         }
 
